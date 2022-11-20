@@ -20,7 +20,6 @@ install_yubikey_configure_pam_services:
   - /etc/pam.d/cron
   - /etc/pam.d/cups
   - /etc/pam.d/gdm-password
-    #  - /etc/pam.d/gdm-smartcard-sssd-or-password
   - /etc/pam.d/login
   - /etc/pam.d/other
   - /etc/pam.d/polkit-1
