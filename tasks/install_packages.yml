@@ -1,0 +1,14 @@
+---
+- name: Install packages for yubikey
+  apt:
+    name: "{{ install_yubikey_packages }}"
+    update_cache: yes
+    state: latest
+  become: true
+
+- name: start and enable pcscd
+  service:
+    name: pcscd
+    state: started
+    enabled: true
+  become: true

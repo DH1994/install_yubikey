@@ -1,0 +1,32 @@
+---
+# defaults file for install_yubikey
+install_yubikey_packages:
+  - pcscd
+  - yubikey-manager
+  - libpam-u2f
+  - libpam-yubico
+  - yubikey-personalization-gui
+  - yubico-piv-tool
+
+install_yubikey_u2f_mappings_file: /etc/u2f_mappings
+
+# auth type can be sufficient or required. Use required for 2fa. 
+install_yubikey_auth_type: sufficient
+
+install_yubikey_configure_pam: true
+install_yubikey_configure_pam_services:
+  - /etc/pam.d/chfn
+  - /etc/pam.d/chsh
+  - /etc/pam.d/cron
+  - /etc/pam.d/cups
+  - /etc/pam.d/gdm-password
+    #  - /etc/pam.d/gdm-smartcard-sssd-or-password
+  - /etc/pam.d/login
+  - /etc/pam.d/other
+  - /etc/pam.d/polkit-1
+  - /etc/pam.d/ppp
+  - /etc/pam.d/sshd
+  - /etc/pam.d/su
+  - /etc/pam.d/sudo
+  - /etc/pam.d/sudo-i
+

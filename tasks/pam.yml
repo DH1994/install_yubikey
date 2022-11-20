@@ -1,0 +1,18 @@
+---
+- name: Create /etc/pam.d/common-u2f config
+  copy:
+    content: "auth {{ install_yubikey_auth_type }} pam_u2f.so authfile=/etc/u2f_mappings cue"
+    dest: /etc/pam.d/common-u2f
+  become: true
+
+- debug:
+    msg: Touch the yubikey when it flashes
+
+- name: Configure pam services
+  blockinfile:
+    block: "@include common-u2f"
+    path: "{{ item }}"
+    insertbefore: "@include common-auth"
+    backup: yes
+  become: true
+  loop: "{{ install_yubikey_configure_pam_services }}"

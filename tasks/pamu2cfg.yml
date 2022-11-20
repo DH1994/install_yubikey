@@ -1,0 +1,25 @@
+---
+- name: Insert yubikey
+  ansible.builtin.pause:
+    prompt: "Yubikey required. Please insert yubikey, enter to continue"
+    echo: no
+
+- debug: 
+    msg: "Touch yubikey when it flashes"
+
+- name: Get u2f key
+  command: pamu2fcfg
+  register: result
+
+- name: Create u2f_mappings file
+  blockinfile:
+    create: true
+    block: "{{ result.stdout }}\n"
+    path: "{{ install_yubikey_u2f_mappings_file }}"
+    backup: yes
+  become: true
+
+- name: Remove yubikey
+  ansible.builtin.pause:
+    prompt: "Please remove yubikey, enter to continue"
+    echo: no
